@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="claro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arquivo de Jogo — Luiz Liz</title>
+    <meta name="description" content="Álbum de memórias escolares e redações de Luiz Liz.">
+    
+    <!-- Fontes: Anton para títulos (jornal) e Courier Prime para texto (máquina de escrever) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        (function(){var t=localStorage.getItem('tema-luiz');document.documentElement.setAttribute('data-theme',t||'claro');})();
+    </script>
+</head>
+<body>
+
+    <div class="textura-papel" aria-hidden="true"></div>
+
+    <header class="masthead">
+        <div class="masthead-data">
+            <span>EDIÇÃO ESPECIAL</span>
+            <span>FORMATURA 2026</span>
+        </div>
+        <h1 class="masthead-titulo">O DIÁRIO DO LUIZ</h1>
+        <div class="masthead-sub">
+            <span>Nº 10</span>
+            <span>ARQUIVO PESSOAL</span>
+            <button id="tema-btn" class="btn-tema">◐ MUDAR PAPEL</button>
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO / CAPA -->
+        <section class="capa">
+            <div class="capa-titulo">
+                <h2>MEMÓRIAS<br><span>EM CAMPO</span></h2>
+            </div>
+            <div class="capa-chamada">
+                <p>"O apito inicial de uma história escrita entre cadernos e arquibancadas. 3 tempos, 17 laudas e uma trajetória inesquecível."</p>
+                <a href="#memorias" class="btn-jornal">LER OS AUTOS ↓</a>
+            </div>
+        </section>
+
+        <!-- MEMÓRIAS (RECORTES) -->
+        <section id="memorias" class="secao-jornal">
+            <div class="cabecalho-secao">
+                <h3>1º TEMPO: O ÁLBUM</h3>
+                <div class="linha-pontilhada"></div>
+            </div>
+
+            <!-- Layout estilo mural de recortes -->
+            <div class="mural-recortes" id="grid-memorias">
+                <!-- JS injeta aqui -->
+            </div>
+        </section>
+
+        <!-- REDAÇÕES (LAUDAS) -->
+        <section id="redacoes" class="secao-jornal">
+            <div class="cabecalho-secao">
+                <h3>2º TEMPO: AS LAUDAS</h3>
+                <div class="linha-pontilhada"></div>
+            </div>
+
+            <div class="busca-jornal">
+                <input type="text" id="busca-input" placeholder="BUSCAR NOS ARQUIVOS...">
+                <span id="contador-redacoes">17 DOCUMENTOS</span>
+            </div>
+
+            <div class="grid-laudas" id="grid-redacoes">
+                <!-- JS injeta aqui -->
+            </div>
+        </section>
+    </main>
+
+    <!-- MODAL DOCUMENTO -->
+    <div id="modal" class="modal-documento">
+        <div class="modal-fundo"></div>
+        <div class="modal-papel">
+            <button id="modal-fechar" class="btn-fechar">X</button>
+            
+            <div class="documento-header">
+                <span class="doc-num" id="modal-num">01</span>
+                <div class="doc-info">
+                    <span id="modal-cat">CATEGORIA</span>
+                    <h3 id="modal-titulo">Título</h3>
+                </div>
+            </div>
+            
+            <div class="documento-corpo">
+                <p class="doc-tema" id="modal-tema">Tema principal</p>
+                <div class="doc-texto" id="modal-texto">Texto...</div>
+            </div>
+
+            <div class="documento-rodape">
+                <button id="btn-audio" class="btn-audio-jornal">▶ OUVIR LAUDA</button>
+                <span class="carimbo">ARQUIVO CONFIDENCIAL</span>
+            </div>
+        </div>
+    </div>
+
+    <footer class="rodape-jornal">
+        <div class="rodape-linha"></div>
+        <p>O FIM DO JOGO É APENAS O COMEÇO DA HISTÓRIA.</p>
+        <span>LUIZ LIZ · 2026</span>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
