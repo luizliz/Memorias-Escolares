@@ -1,0 +1,277 @@
+/* =========================================
+   ESTÉTICA: JORNAL ESPORTIVO / ÁLBUM DE RECORTES
+   ========================================= */
+
+:root, [data-theme="claro"] {
+    --papel: #f4f0e6; /* Cor de papel velho */
+    --tinta: #1a1a1a; /* Preto quase puro */
+    --tinta-suave: #4a4a4a;
+    --campo: #1e452b; /* Verde escuro */
+    --campo-claro: #2d6a41;
+    --destaque: #a62639; /* Vermelho de carimbo */
+    --borda: #d1c8b8;
+    
+    --font-titulo: 'Anton', Impact, sans-serif;
+    --font-sub: 'Oswald', sans-serif;
+    --font-texto: 'Courier Prime', monospace; /* Efeito máquina de escrever */
+}
+
+[data-theme="escuro"] {
+    --papel: #121212; 
+    --tinta: #f4f0e6;
+    --tinta-suave: #a0a0a0;
+    --campo: #2d6a41;
+    --campo-claro: #48995e;
+    --destaque: #d9384f;
+    --borda: #333333;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background-color: var(--papel);
+    color: var(--tinta);
+    font-family: var(--font-texto);
+    line-height: 1.5;
+    overflow-x: hidden;
+    transition: background-color 0.4s, color 0.4s;
+}
+
+/* Textura de papel (ruído sutil) */
+.textura-papel {
+    position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: 0.15;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: multiply;
+}
+
+/* ================= HEADER ================= */
+.masthead {
+    border-bottom: 4px solid var(--tinta);
+    border-top: 4px solid var(--tinta);
+    margin: 2rem 5%;
+    padding: 0.5rem 0;
+    text-align: center;
+}
+.masthead-data, .masthead-sub {
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--font-sub); font-size: 0.8rem; text-transform: uppercase; font-weight: 500;
+    border-bottom: 1px solid var(--borda); padding-bottom: 0.5rem; margin-bottom: 0.5rem;
+}
+.masthead-sub { border-bottom: none; border-top: 1px solid var(--borda); padding-top: 0.5rem; margin-top: 0.5rem; }
+.masthead-titulo {
+    font-family: var(--font-titulo); font-size: clamp(3rem, 10vw, 8rem);
+    line-height: 1; text-transform: uppercase; letter-spacing: 2px; margin: 1rem 0;
+}
+.btn-tema { background: none; border: 1px solid var(--tinta); padding: 0.2rem 0.5rem; cursor: pointer; font-family: var(--font-sub); font-weight: 700; color: var(--tinta); }
+.btn-tema:hover { background: var(--tinta); color: var(--papel); }
+
+/* ================= HERO / CAPA ================= */
+.capa {
+    display: grid; grid-template-columns: 1.5fr 1fr; gap: 2rem;
+    padding: 3rem 5%; border-bottom: 4px solid var(--tinta); margin-bottom: 3rem;
+}
+.capa-titulo h2 {
+    font-family: var(--font-titulo); font-size: clamp(4rem, 12vw, 10rem); line-height: 0.85; text-transform: uppercase;
+}
+.capa-titulo h2 span { color: transparent; -webkit-text-stroke: 2px var(--tinta); }
+.capa-chamada { display: flex; flex-direction: column; justify-content: center; border-left: 2px solid var(--tinta); padding-left: 2rem; }
+.capa-chamada p { font-size: 1.1rem; margin-bottom: 2rem; font-weight: 700; }
+.btn-jornal {
+    display: inline-block; background: var(--tinta); color: var(--papel); text-decoration: none;
+    font-family: var(--font-sub); font-weight: 700; font-size: 1.1rem; padding: 1rem; text-align: center;
+    border: 2px solid var(--tinta); transition: 0.2s;
+}
+.btn-jornal:hover { background: var(--destaque); border-color: var(--destaque); color: #fff; }
+
+/* ================= SEÇÕES ================= */
+.secao-jornal { padding: 2rem 5% 5rem; }
+.cabecalho-secao { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; }
+.cabecalho-secao h3 { font-family: var(--font-titulo); font-size: 2.5rem; text-transform: uppercase; white-space: nowrap; }
+.linha-pontilhada { flex: 1; border-bottom: 2px dashed var(--borda); }
+
+/* FILTROS */
+.filtros-memorias { display: flex; gap: 1rem; margin-bottom: 3rem; flex-wrap: wrap; }
+.btn-filtro {
+    font-family: var(--font-sub); font-weight: 500; text-transform: uppercase;
+    background: transparent; border: 2px solid var(--tinta); color: var(--tinta);
+    padding: 0.5rem 1rem; cursor: pointer; transition: 0.2s; font-size: 0.9rem;
+}
+.btn-filtro:hover, .btn-filtro.ativa { background: var(--tinta); color: var(--papel); }
+
+/* ================= MURAL DE MEMÓRIAS (LINHA DO TEMPO) ================= */
+.mural-recortes { 
+    position: relative; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 4rem; 
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+/* A linha pontilhada central conectando tudo */
+.mural-recortes::before {
+    content: ''; 
+    position: absolute; 
+    top: 0; bottom: 0; left: 50%;
+    width: 2px; 
+    background: repeating-linear-gradient(to bottom, transparent, transparent 8px, var(--tinta) 8px, var(--tinta) 16px);
+    transform: translateX(-50%);
+    z-index: 0;
+}
+
+.card-memoria {
+    background: #fff; 
+    padding: 1rem 1rem 2rem 1rem;
+    border: 1px solid var(--borda); 
+    box-shadow: 5px 5px 0 var(--borda);
+    transition: 0.3s; 
+    position: relative; 
+    width: 45%; /* Ocupa quase metade da tela */
+    z-index: 1;
+}
+
+/* Fita adesiva no topo */
+.card-memoria::before {
+    content: ''; 
+    position: absolute; 
+    top: -15px; 
+    left: 50%; 
+    transform: translateX(-50%) rotate(-2deg);
+    width: 100px; 
+    height: 30px; 
+    background: rgba(220, 210, 190, 0.8); 
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+/* Fio conectando o card à linha central */
+.card-memoria::after {
+    content: ''; 
+    position: absolute; 
+    top: 50%; 
+    width: 5%; /* Distância até a linha central */
+    height: 2px; 
+    background: var(--tinta);
+    z-index: 0;
+}
+
+/* Alternando os lados (Esquerda / Direita) */
+.card-memoria:nth-child(odd) { 
+    align-self: flex-start; 
+    transform: rotate(-1.5deg); 
+}
+.card-memoria:nth-child(odd)::after { 
+    right: -5.5%; /* Puxa o fio para a direita */
+}
+
+.card-memoria:nth-child(even) { 
+    align-self: flex-end; 
+    transform: rotate(1.5deg); 
+}
+.card-memoria:nth-child(even)::after { 
+    left: -5.5%; /* Puxa o fio para a esquerda */
+}
+
+/* Efeito ao passar o mouse */
+.card-memoria:hover { 
+    transform: rotate(0) scale(1.03); 
+    box-shadow: 8px 8px 0 var(--tinta); 
+    z-index: 10; 
+}
+
+/* Estilos internos do card */
+.memoria-foto { 
+    width: 100%; height: 220px; background: #ddd; margin-bottom: 1rem; 
+    overflow: hidden; border: 1px solid #ccc; filter: grayscale(1) contrast(1.2); 
+}
+.memoria-foto img { width: 100%; height: 100%; object-fit: cover; }
+.card-memoria:hover .memoria-foto { filter: grayscale(0); }
+.memoria-ano { position: absolute; top: 1.5rem; right: 1.5rem; background: var(--destaque); color: #fff; font-family: var(--font-sub); padding: 0.2rem 0.6rem; font-weight: 700; transform: rotate(5deg); }
+.memoria-etapa { font-family: var(--font-sub); font-size: 0.8rem; text-transform: uppercase; color: var(--destaque); font-weight: 700; }
+.memoria-titulo { font-family: var(--font-titulo); font-size: 1.8rem; text-transform: uppercase; margin: 0.2rem 0 0.5rem; line-height: 1; color: #111; }
+.memoria-texto { font-size: 0.9rem; color: #333; line-height: 1.6; }
+
+/* Responsivo para celular (vira uma linha só na esquerda) */
+@media (max-width: 768px) {
+    .mural-recortes::before { left: 30px; transform: none; }
+    .card-memoria { width: calc(100% - 60px); align-self: flex-end !important; margin-left: 60px; }
+    .card-memoria::after { left: -30px !important; right: auto !important; width: 30px !important; }
+    .card-memoria:nth-child(odd), .card-memoria:nth-child(even) { transform: none; }
+}
+/* Fita adesiva no topo */
+.card-memoria::before {
+    content: ''; position: absolute; top: -15px; left: 50%; transform: translateX(-50%) rotate(-2deg);
+    width: 100px; height: 30px; background: rgba(220, 210, 190, 0.6); backdrop-filter: blur(2px); border: 1px solid rgba(0,0,0,0.05);
+}
+
+.memoria-foto { width: 100%; height: 220px; background: #ddd; margin-bottom: 1rem; overflow: hidden; border: 1px solid #ccc; filter: grayscale(1) contrast(1.2); }
+.memoria-foto img { width: 100%; height: 100%; object-fit: cover; }
+.card-memoria:hover .memoria-foto { filter: grayscale(0); }
+
+.memoria-ano { position: absolute; top: 1.5rem; right: 1.5rem; background: var(--destaque); color: #fff; font-family: var(--font-sub); padding: 0.2rem 0.6rem; font-weight: 700; transform: rotate(5deg); }
+.memoria-etapa { font-family: var(--font-sub); font-size: 0.8rem; text-transform: uppercase; color: var(--destaque); font-weight: 700; }
+.memoria-titulo { font-family: var(--font-titulo); font-size: 1.8rem; text-transform: uppercase; margin: 0.2rem 0 0.5rem; line-height: 1; color: #111; }
+.memoria-texto { font-size: 0.9rem; color: #333; line-height: 1.6; }
+
+/* ================= BUSCA ================= */
+.busca-jornal { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--tinta); padding-bottom: 1rem; margin-bottom: 2rem; }
+#busca-input { background: transparent; border: none; font-family: var(--font-texto); font-size: 1.2rem; color: var(--tinta); outline: none; width: 60%; }
+#busca-input::placeholder { color: var(--tinta-suave); }
+#contador-redacoes { font-family: var(--font-sub); font-weight: 700; background: var(--tinta); color: var(--papel); padding: 0.2rem 0.8rem; }
+
+/* ================= GRID REDAÇÕES (TICKETS) ================= */
+.grid-laudas { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+.lauda-card {
+    border: 2px dashed var(--tinta); padding: 1.5rem; cursor: pointer;
+    background: transparent; transition: 0.2s; position: relative;
+    display: flex; flex-direction: column; gap: 0.8rem;
+}
+.lauda-card:hover { background: var(--tinta); color: var(--papel); }
+.lauda-topo { display: flex; justify-content: space-between; font-family: var(--font-sub); font-weight: 700; font-size: 0.8rem; }
+.lauda-titulo { font-family: var(--font-titulo); font-size: 1.5rem; line-height: 1.1; text-transform: uppercase; }
+.lauda-tema { font-size: 0.85rem; font-style: italic; opacity: 0.8; }
+.lauda-cat { border: 1px solid currentColor; padding: 0.1rem 0.4rem; font-size: 0.7rem; text-transform: uppercase; width: fit-content; }
+mark { background: var(--destaque); color: #fff; }
+
+/* ================= MODAL (DOCUMENTO) ================= */
+.modal-documento { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 1rem; visibility: hidden; opacity: 0; transition: 0.3s; }
+.modal-documento.ativo { visibility: visible; opacity: 1; }
+.modal-fundo { position: absolute; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(4px); }
+.modal-papel {
+    position: relative; z-index: 2; background: var(--papel); color: var(--tinta);
+    width: 100%; max-width: 800px; max-height: 90vh; overflow-y: auto;
+    border: 2px solid var(--tinta); box-shadow: 10px 10px 0 var(--destaque);
+    padding: 3rem; transform: translateY(20px); transition: 0.3s;
+}
+.modal-documento.ativo .modal-papel { transform: translateY(0); }
+.btn-fechar { position: absolute; top: 1rem; right: 1rem; background: var(--tinta); color: var(--papel); border: none; width: 35px; height: 35px; font-family: var(--font-sub); font-size: 1.2rem; cursor: pointer; }
+.btn-fechar:hover { background: var(--destaque); }
+
+.documento-header { display: flex; gap: 1.5rem; border-bottom: 4px solid var(--tinta); padding-bottom: 1rem; margin-bottom: 2rem; align-items: flex-start; }
+.doc-num { font-family: var(--font-titulo); font-size: 6rem; line-height: 0.8; }
+.doc-info span { font-family: var(--font-sub); font-weight: 700; color: var(--destaque); text-transform: uppercase; }
+.doc-info h3 { font-family: var(--font-titulo); font-size: 2.5rem; line-height: 1; text-transform: uppercase; }
+
+.doc-tema { font-family: var(--font-sub); font-size: 1.2rem; font-weight: 500; margin-bottom: 2rem; padding-left: 1rem; border-left: 4px solid var(--destaque); }
+.doc-texto { font-size: 1.1rem; line-height: 1.8; white-space: pre-wrap; text-align: justify; }
+
+.documento-rodape { margin-top: 3rem; padding-top: 1rem; border-top: 2px dashed var(--borda); display: flex; justify-content: space-between; align-items: center; }
+.btn-audio-jornal { background: var(--tinta); color: var(--papel); border: none; padding: 0.8rem 1.5rem; font-family: var(--font-sub); font-weight: 700; cursor: pointer; transition: 0.2s; display: flex; gap: 0.5rem; align-items: center; }
+.btn-audio-jornal:hover { background: var(--destaque); }
+.carimbo { border: 3px solid var(--destaque); color: var(--destaque); padding: 0.5rem 1rem; font-family: var(--font-sub); font-weight: 700; text-transform: uppercase; transform: rotate(-5deg); opacity: 0.7; }
+
+/* ================= RODAPÉ ================= */
+.rodape-jornal { text-align: center; padding: 4rem 5%; background: var(--tinta); color: var(--papel); }
+.rodape-jornal p { font-family: var(--font-titulo); font-size: 2rem; text-transform: uppercase; margin-bottom: 1rem; }
+.rodape-jornal span { font-family: var(--font-sub); letter-spacing: 2px; }
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+    .capa { grid-template-columns: 1fr; }
+    .capa-chamada { border-left: none; border-top: 2px solid var(--tinta); padding-left: 0; padding-top: 1.5rem; }
+    .masthead-titulo { font-size: 3.5rem; }
+    .modal-papel { padding: 1.5rem; }
+    .documento-header { flex-direction: column; gap: 0.5rem; }
+    .doc-num { font-size: 4rem; }
+    .doc-info h3 { font-size: 1.8rem; }
+}
